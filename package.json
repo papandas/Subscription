@@ -1,0 +1,29 @@
+{
+  "name": "subscription-evm",
+  "version": "1.0.0",
+  "description": "A public blockchain project",
+  "main": "truffle-config.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {
+    "dateformat": "^3.0.3"
+  },
+  "devDependencies": {
+    "lite-server": "^2.5.4"
+  },
+  "scripts": {
+    "dev": "lite-server",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/papandas/Subscription.git"
+  },
+  "author": "Papan Das",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/papandas/Subscription/issues"
+  },
+  "homepage": "https://github.com/papandas/Subscription#readme"
+}
