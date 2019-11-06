@@ -1,6 +1,6 @@
 <div class="container">
 
-    <div class="container pt-5">
+    <div id="formContainer" class="container pt-5">
         <div class="card border-0 shadow my-5">
             <div class="card-body p-5">
                 <div class="row">
@@ -13,8 +13,8 @@
                                     value="Select Amount: ">
                             </div>
                             <div class="form-group mx-sm-3 mb-2">
-                                <label for="valueSelect" class="sr-only">Value Select</label>
-                                <select class="form-control" id="valueSelect">
+                                <label for="value" class="sr-only">Value Select</label>
+                                <select class="form-control" id="value">
                                     <option value="0.01">0.01 Eth</option>
                                     <option value="0.02">0.02 Eth</option>
                                     <option value="0.03">0.03 Eth</option>
@@ -22,7 +22,7 @@
                                     <option value="0.05">0.05 Eth</option>
                                 </select>
                             </div>
-                            <button type="submit" class="btn btn-primary mb-2">
+                            <button type="submit" class="btn btn-primary mb-2" onclick="App.SaveSubscription(); return false;">
                                 <i class="fa fa-newspaper-o"></i> Subscribe Now!
                             </button>
                         </form>
@@ -38,6 +38,8 @@
                 <div class="row">
                     <div class="col-lg-8 mx-auto">
                         <h2>Our Subscription User List!</h2>
+                        <div id="subscriptionListHolder"></div>
+                        <!--<h2>Our Subscription User List!</h2>
                         <ul class="list-group">
                             <li class="list-group-item">
                                 <div class="row pb-2">
@@ -74,6 +76,31 @@
                                 </div>
                             </li>
                         </ul>
+
+                        <div class="row">
+                            <div class="col-lg-6 offset-3">
+                               <h2>Sale up to 45%!</h2>
+                               <div class="timer">
+                                  <div>
+                                     <span class="days" id="day"></span> 
+                                     <div class="smalltext">Days</div>
+                                  </div>
+                                  <div>
+                                     <span class="hours" id="hour"></span> 
+                                     <div class="smalltext">Hours</div>
+                                  </div>
+                                  <div>
+                                     <span class="minutes" id="minute"></span> 
+                                     <div class="smalltext">Minutes</div>
+                                  </div>
+                                  <div>
+                                     <span class="seconds" id="second"></span> 
+                                     <div class="smalltext">Seconds</div>
+                                  </div>
+                                  <p id="time-up"></p>
+                               </div>
+                            </div>
+                         </div>-->
                     </div>
                 </div>
             </div>
