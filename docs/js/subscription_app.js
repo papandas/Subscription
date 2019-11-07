@@ -68,7 +68,8 @@ App = {
         
         if (error === null) {
           if(App.subscriptionIndexCount < event.args._subscriptionIndex.toNumber()){
-            console.log("["+ event.event+"]","Previous:", App.subscriptionIndexCount,", Current:", event.args._subscriptionIndex.toNumber())
+            console.log("["+ event.event+"]","Previous:", App.subscriptionIndexCount,", Current:", event.args._subscriptionIndex.toNumber());
+            App.GetAllSubscriptions();
           }
         }else {
           console.error("--Error--", error)
@@ -234,6 +235,7 @@ App = {
     // Load page.
 
     console.log("LOAD ALL SUBSCRIPTIONS")
+    $('#subscriptionListHolder').empty();
 
     if (App.subscriptionArray.length > 0) {
 
@@ -269,7 +271,7 @@ App = {
                   </li>`
 
           App.IntervalInstance[`Item${idx}`] = setInterval(function () { App.IntervalFunction() }, 1000);
-          console.log("Interval Wala!", App.IntervalInstance[`Item${idx}`])
+          //console.log("Interval Wala!", App.IntervalInstance[`Item${idx}`])
 
         })(each, App.subscriptionArray);
       }
