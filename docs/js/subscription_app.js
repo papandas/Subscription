@@ -279,7 +279,7 @@ App = {
                   </li>`
 
           App.IntervalInstance[`Item${idx}`] = setInterval(function () { App.IntervalFunction() }, 1000);
-          //console.log("Interval Wala!", App.IntervalInstance[`Item${idx}`])
+          console.log("Count Loading!", parseInt(idx), App.subscriptionIndexCount)
           if(parseInt(idx) + 1 == App.subscriptionIndexCount){
             console.log("LOADING COMPLETE!")
             App.subscriptionLoadingComplete = true;
