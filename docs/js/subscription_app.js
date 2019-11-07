@@ -160,7 +160,7 @@ App = {
         $('#loader').hide();
         $('#content').show();
 
-        App.GetAllSubscriptions();
+        //App.GetAllSubscriptions();
       }
     }).catch((error) => {
       console.error("--Error--", error)
@@ -280,7 +280,7 @@ App = {
 
           App.IntervalInstance[`Item${idx}`] = setInterval(function () { App.IntervalFunction() }, 1000);
           
-          
+
           if(parseInt(idx) + 1 == App.subscriptionArray.length){
             console.log("LOADING COMPLETE!")
             App.subscriptionLoadingComplete = true;
