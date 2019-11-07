@@ -67,6 +67,7 @@ App = {
       }).watch(function (error, event) {
         
         if (error === null) {
+          console.log(App.subscriptionIndexCount, event.args._subscriptionIndex.toNumber())
           if(App.subscriptionIndexCount < event.args._subscriptionIndex.toNumber()){
             console.log("["+ event.event+"]","Previous:", App.subscriptionIndexCount,", Current:", event.args._subscriptionIndex.toNumber());
             App.GetAllSubscriptions();
