@@ -5,6 +5,7 @@ App = {
   loading: false,
   subscriptionArray: new Array(),
   subscriptionTimeInMin: 20,
+  subscriptionIndexCount: 0,
   toast: Swal.mixin({
     toast: true,
     position: 'top-end',
@@ -55,6 +56,25 @@ App = {
 
   // Listen for events emitted from the contract
   listenForEvents: function () {
+
+    App.contracts.AssetsManagement.deployed().then(function (instance) {
+      // Restart Chrome if you are unable to receive this event
+      // This is a known issue with Metamask
+      // https://github.com/MetaMask/metamask-extension/issues/2393
+      instance.SubscriptionEvent({}, {
+        fromBlock: 0,
+        toBlock: 'latest'
+      }).watch(function (error, event) {
+        
+        if (error === null) {
+          if(App.subscriptionIndexCount < event.args._subscriptionIndex.toNumber()){
+            console.log("["+ event.event+"]","Previous:", App.subscriptionIndexCount,", Current:", event.args._subscriptionIndex.toNumber())
+          }
+        }else {
+          console.error("--Error--", error)
+        }
+      });
+    })
 
   },
   render: function () {
@@ -152,6 +172,8 @@ App = {
       return subscriptionInstance.subscriptionIndex();
     }).then((index) => {
       console.log("Subscriptions Index: ", index.toNumber());
+      App.subscriptionIndexCount = index.toNumber();
+
       if (index.toNumber() > 0) {
 
         App.subscriptionArray = new Array();
@@ -245,24 +267,6 @@ App = {
           bodyStr += `</div>
                       </div>
                   </li>`
-
-          //${App.FormatDateTime(arr[idx].endDT)}
-          //${parseInt(arr[idx].endDT) - App.ReturnUTCTime()}
-
-          //var bar1 = new ldBar(`#subscriptionListHolder-${idx}`);
-          //var bar2 = document.getElementById(`myItem${idx}`).ldBar;
-
-          //<div class="col">
-          //<div id="IntervalItem${idx}"></div>
-          //</div>
-
-          //bar1.set(60);
-
-          /**<div>
-                                  <span class="days" id="IntervalItem${idx}day"></span> 
-                                  <div class="smalltext">Days</div>
-                                </div>
-                                 */
 
           App.IntervalInstance[`Item${idx}`] = setInterval(function () { App.IntervalFunction() }, 1000);
           console.log("Interval Wala!", App.IntervalInstance[`Item${idx}`])
