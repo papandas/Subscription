@@ -49,7 +49,7 @@ App = {
         }
 
       });
-      //App.listenForEvents();
+      App.listenForEvents();
       return App.render();
     })
   },
