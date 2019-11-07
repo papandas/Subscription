@@ -6,6 +6,7 @@ App = {
   subscriptionArray: new Array(),
   subscriptionTimeInMin: 20,
   subscriptionIndexCount: 0,
+  subscriptionLoadingComplete: false,
   toast: Swal.mixin({
     toast: true,
     position: 'top-end',
@@ -67,10 +68,13 @@ App = {
       }).watch(function (error, event) {
         
         if (error === null) {
-          console.log(App.subscriptionIndexCount, event.args._subscriptionIndex.toNumber())
+          //console.log(App.subscriptionIndexCount, event.args._subscriptionIndex.toNumber())
           if(App.subscriptionIndexCount < event.args._subscriptionIndex.toNumber()){
             console.log("["+ event.event+"]","Previous:", App.subscriptionIndexCount,", Current:", event.args._subscriptionIndex.toNumber());
-            App.GetAllSubscriptions();
+            if(App.subscriptionLoadingComplete){
+              App.subscriptionLoadingComplete = false;
+              App.GetAllSubscriptions();
+            }
           }
         }else {
           console.error("--Error--", error)
@@ -276,6 +280,10 @@ App = {
 
           App.IntervalInstance[`Item${idx}`] = setInterval(function () { App.IntervalFunction() }, 1000);
           //console.log("Interval Wala!", App.IntervalInstance[`Item${idx}`])
+          if(parseInt(idx) + 1 == App.subscriptionIndexCount){
+            console.log("LOADING COMPLETE!")
+            App.subscriptionLoadingComplete = true;
+          }
 
         })(each, App.subscriptionArray);
       }
