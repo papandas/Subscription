@@ -263,7 +263,10 @@ App = {
                                 </div>
                               </div>
                           </div>
-                          <div class="col col-6">Account: <span class="badge badge-light ml-3"> ${arr[idx].creator.slice(0, 12)}........${arr[idx].creator.slice(-8)} </span>`
+                          <div class="col col-6">Account: <span class="badge badge-light ml-3"> 
+                            <a class="dropdown-item" href="https://ropsten.etherscan.io/address/${arr[idx].creator}" target="_blank">
+                              ${arr[idx].creator.slice(0, 12)}........${arr[idx].creator.slice(-8)}
+                            </a></span>`
           if(App.account === arr[idx].creator){
             bodyStr += `<i class="fa fa-star" aria-hidden="true" style="color:yellow"></i>`
           }
