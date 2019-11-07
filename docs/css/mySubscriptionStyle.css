@@ -1,0 +1,54 @@
+body {
+    background: url('../images/header_top.jpg') no-repeat center center fixed;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    background-size: cover;
+    -o-background-size: cover;
+}
+
+.ldBar-label {
+    display: none
+}
+
+h2 {
+    font-family: Poppins;
+    font-weight: 500;
+    margin: 0 0 20px;
+}
+.timer {
+    margin: 0 0 45px;
+    font-family: sans-serif;
+    color: #fff;
+    display: inline-block;
+    font-weight: 100;
+    text-align: center;
+    font-size: 30px;
+}
+.timer div {
+    padding: 5px;
+    border-radius: 3px;
+    background: #ff6600;
+    display: inline-block;
+    font-family: Oswald;
+    font-size: 26px;
+    font-weight: 400;
+    width: 80px;
+}
+.timer .smalltext {
+    color: #000000;
+    font-size: 12px;
+    font-family: Poppins;
+    font-weight: 500;
+    display: block;
+    padding: 0;
+    width: auto;
+}
+.timer #time-up {
+    margin: 8px 0 0;
+    text-align: left;
+    font-size: 14px;
+    font-style: normal;
+    color: #000000;
+    font-weight: 500;
+    letter-spacing: 1px;
+}
