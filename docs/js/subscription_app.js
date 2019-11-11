@@ -200,10 +200,12 @@ App = {
           subscriptionInstance.subscriptions(i)
             .then((subscribe) => {
               let subscriberDt = subscribe[2].toNumber();
-              console.log(i, subscribe[1], "TimeImMilliSeconds", subscriberDt , "Time(EVM)", App.FormatDateTime(subscriberDt), "-NowInGMT-", App.FormatDateTime(App.ReturnUTCTime()) );
-              let dt = new Date();
-              var results = Math.round(App.ReturnUTCTime() + dt.getTimezoneOffset()*60*1000);
-              console.log("[::Verify::]", App.ReturnUTCTime(), subscriberDt, (App.ReturnUTCTime() <= subscriberDt), App.FormatDateTime(results), (results <= subscriberDt));
+              let utcTime = App.ReturnUTCTime();
+              console.log(i, subscribe[1], "TimeImMilliSeconds", subscriberDt , "Time(EVM)", App.FormatDateTime(subscriberDt), "-NowInGMT-", App.FormatDateTime(utcTime) );
+              let dt = new Date(utcTime);
+              var results = Math.round(utcTime + dt.getTimezoneOffset()*60*1000);
+              console.log("[::Verify::]", utcTime, subscriberDt, (utcTime <= subscriberDt), App.FormatDateTime(results), (results <= subscriberDt));
+              console.log("[::Verify::]", dt.getTimezoneOffset());
               /*let dt = new Date();
               let offset = Math.round(subscriberDt - dt.getTimezoneOffset()*60*1000)
               console.log("Offset: InMilliseconds", offset, "-ii-", App.FormatDateTime(offset))*/
