@@ -203,7 +203,7 @@ App = {
               let utcTime = App.ReturnUTCTime();
               console.log(i, subscribe[1], "TimeImMilliSeconds", subscriberDt , "Time(EVM)", App.FormatDateTime(subscriberDt), "-NowInGMT-", App.FormatDateTime(utcTime) );
               let dt = new Date();
-              let evmDt = new Date(subscriberDt+(dt.getTimezoneOffset()*60*1000));
+              let evmDt = new Date(subscriberDt+(dt.getTimezoneOffset()*60*1000)-(-330*60*1000) );
               console.log("[::Verify::]", evmDt, App.FormatDateTime(evmDt.toUTCString()), dt.getTimezoneOffset());
 
               //var results = Math.round(subscriberDt - dt.getTimezoneOffset()*60*1000);
