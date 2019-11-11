@@ -254,10 +254,10 @@ App = {
         
 
       } else {
-        console.log("Subscription list empty.")
+        console.log("Fresh smart contract.")
         App.toast.fire({
           type: 'error',
-          title: 'Subscription list empty.'
+          title: 'Fresh smart contract.'
         })
       }
 
