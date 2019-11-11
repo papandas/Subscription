@@ -1,106 +1,62 @@
 <div class="container">
 
-    <div id="formContainer" class="container pt-5">
-        <div class="card border-0 shadow my-5">
-            <div class="card-body p-5">
+    <div class="container pt-5">
+        <div class="card border shadow my-5">
+            <div class="card-body">
                 <div class="row">
-                    <div class="col-lg-8 mx-auto">
-                        <h2>Subscribe With Us!</h2>
-                        <form class="form-inline">
-                            <div class="form-group mb-2">
-                                <label for="staticEmail2" class="sr-only">Email</label>
-                                <input type="text" readonly class="form-control-plaintext" id="staticEmail2"
-                                    value="Select Amount: ">
-                            </div>
-                            <div class="form-group mx-sm-3 mb-2">
-                                <label for="value" class="sr-only">Value Select</label>
-                                <select class="form-control" id="value">
-                                    <option value="0.01">0.01 Eth</option>
-                                    <option value="0.02">0.02 Eth</option>
-                                    <option value="0.03">0.03 Eth</option>
-                                    <option value="0.04">0.04 Eth</option>
-                                    <option value="0.05">0.05 Eth</option>
-                                </select>
-                            </div>
-                            <button type="submit" class="btn btn-primary mb-2" onclick="App.SaveSubscription(); return false;">
-                                <i class="fa fa-newspaper-o"></i> Subscribe Now!
-                            </button>
-                        </form>
-                    </div>
+                    <ul class="nav nav-tabs" id="myTab" role="tablist">
+                        <li class="nav-item">
+                            <a class="nav-link active" id="subscribe-tab" data-toggle="tab" href="#subscribe" role="tab"
+                                aria-controls="subscribe" aria-selected="true">Subscribe With Us!</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" id="profile-tab" data-toggle="tab" href="#profile" role="tab"
+                                aria-controls="profile" aria-selected="false">Subscription List</a>
+                        </li>
+                    </ul>
                 </div>
-            </div>
-        </div>
-    </div>
-
-    <div class="container">
-        <div class="card border-0 shadow my-5">
-            <div class="card-body p-5">
                 <div class="row">
-                    <div class="col-lg-8 mx-auto">
-                        <h2>Our Subscription User List!</h2>
-                        <div id="subscriptionListHolder"></div>
-                        <!--<h2>Our Subscription User List!</h2>
-                        <ul class="list-group">
-                            <li class="list-group-item">
-                                <div class="row pb-2">
-                                    <div class="col">
-                                        0x8c2690a455452c46Ce2422932f09457b1875fA4D
-                                    </div>
-                                    <div class="col">
-                                        <div id="myItem1" style="width:100%;height:70px;" data-preset="stripe"></div>
-                                        <script>
-                                            var bar1 = new ldBar("#myItem1");
-                                            var bar2 = document.getElementById('myItem1').ldBar;
-                                            bar1.set(60);
+                    <div class="col col-12">
 
-                                            setTimeout(function () { bar1.set(95); }, 3000);
-                                        </script>
+                        <div class="tab-content" id="myTabContent">
+                            <div class="tab-pane fade show active" id="subscribe" role="tabpanel"
+                                aria-labelledby="subscribe-tab">
+                                <div class="card border-0 shadow">
+                                    <div class="card-body p-5">
+                                        <div class="row">
+                                            <div class="col-lg-8 mx-auto">
+                                                <h2>Subscribe With Us!</h2>
+                                                <form>
+                                                    <div class="form-group mb-3">
+                                                        <label for="staticEmail2" class="sr-only">Email</label>
+                                                        <input type="text" readonly class="form-control-plaintext"
+                                                            id="staticEmail2" value="Subscription Cost is 0.01 Ether.">
+                                                    </div>
+                                                    <button type="submit" class="btn btn-primary mb-2"
+                                                        onclick="App.SaveSubscription(); return false;">
+                                                        <i class="fa fa-newspaper-o"></i> Subscribe Now!
+                                                    </button>
+                                                </form>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </li>
-                            <li class="list-group-item">
-                                <div class="row pb-2">
-                                    <div class="col">
-                                        0x8c2690a455452c46Ce2422932f09457b1875fA4D
-                                    </div>
-                                    <div class="col">
-                                        <div id="myItem2" style="width:100%;height:70px;" data-preset="stripe"></div>
-                                        <script>
-                                            var bar3 = new ldBar("#myItem2");
-                                            var bar4 = document.getElementById('myItem2').ldBar;
-                                            bar3.set(60);
-
-                                            setTimeout(function () { bar3.set(35); }, 3000);
-                                        </script>
-                                    </div>
-                                </div>
-                            </li>
-                        </ul>
-
-                        <div class="row">
-                            <div class="col-lg-6 offset-3">
-                               <h2>Sale up to 45%!</h2>
-                               <div class="timer">
-                                  <div>
-                                     <span class="days" id="day"></span> 
-                                     <div class="smalltext">Days</div>
-                                  </div>
-                                  <div>
-                                     <span class="hours" id="hour"></span> 
-                                     <div class="smalltext">Hours</div>
-                                  </div>
-                                  <div>
-                                     <span class="minutes" id="minute"></span> 
-                                     <div class="smalltext">Minutes</div>
-                                  </div>
-                                  <div>
-                                     <span class="seconds" id="second"></span> 
-                                     <div class="smalltext">Seconds</div>
-                                  </div>
-                                  <p id="time-up"></p>
-                               </div>
                             </div>
-                         </div>-->
+                            <div class="tab-pane fade col-12" style="width: 100%;" id="profile" role="tabpanel"
+                                aria-labelledby="profile-tab">
+                                <div class="row">
+                                    <div class="col-lg-10 mx-auto">
+                                        <br/>
+                                        <h2>Our Subscription User List!</h2>
+                                        <div id="subscriptionListHolder"></div>
+                                    </div>
+                                </div>
+
+                            </div>
+                            <div class="tab-pane fade" id="contact" role="tabpanel" aria-labelledby="contact-tab">
+
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>

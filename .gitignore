@@ -1,5 +1,6 @@
 resources*
 contracts/Subscription.sol.bak
+src/js/subscription_app_20191111.js
 
 # Logs
 logs

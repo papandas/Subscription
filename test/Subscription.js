@@ -24,7 +24,7 @@ contract('Subscription Ethereum Network', function (accounts) {
         }).then((ContractBalance)=>{     
             console.log("Before-:-ContractBalance", web3.utils.fromWei(ContractBalance, 'ether'));
 
-            return subscriptionInstance.putSubscriptions(dt, { from: ac1, value: web3.utils.toWei('1', 'ether') }); 
+            return subscriptionInstance.putSubscriptions(1, { from: ac1, value: web3.utils.toWei('1', 'ether') }); 
         }).then((receipt) => {
             assert.equal(receipt.receipt.status, true, "Transaction was not saved.");
 
@@ -33,9 +33,11 @@ contract('Subscription Ethereum Network', function (accounts) {
         }).then((results)=>{
             
             var _dt = results[2].toNumber();
-            assert.equal(_dt, dt, "Datetime mismatch.");
+
+            //assert.equal(_dt, dt, "Datetime mismatch.");
             //console.log("DateTime in Milliseconds: ", dt)
-            //console.log("DateTime Formated: ", dateFormat(dt , "dddd, mmmm dS, yyyy, h:MM:ss TT"));
+            console.log("DateTime Formated: ", dateFormat(dt , "dddd, mmmm dS, yyyy, h:MM:ss TT"));
+            console.log("DateTime Formated: ", dateFormat(_dt , "dddd, mmmm dS, yyyy, h:MM:ss TT"));
 
             return web3.eth.getBalance(ac1);
         }).then((AccountBalance)=>{     
@@ -45,7 +47,7 @@ contract('Subscription Ethereum Network', function (accounts) {
         }).then((ContractBalance)=>{     
             console.log("After-:-ContractBalance", web3.utils.fromWei(ContractBalance, 'ether'));
 
-            return subscriptionInstance.putSubscriptions((dt + (1000 * 60 * 5)), { from: ac1, value: web3.utils.toWei('1', 'ether')});
+            return subscriptionInstance.putSubscriptions((1000 * 60 * 5), { from: ac1, value: web3.utils.toWei('1', 'ether')});
         }).then((receipt)=>{
             assert.equal(receipt.receipt.status, true, "Transaction was not saved.");
 
@@ -59,8 +61,8 @@ contract('Subscription Ethereum Network', function (accounts) {
 
             var _dt = results[2].toNumber();
             
-            //console.log("DateTime in Milliseconds: ", _dt)
-            //console.log("DateTime Formated: ", dateFormat(_dt , "dddd, mmmm dS, yyyy, h:MM:ss TT"));
+            console.log("DateTime Formated: ", dateFormat(dt , "dddd, mmmm dS, yyyy, h:MM:ss TT"));
+            console.log("DateTime Formated: ", dateFormat(_dt , "dddd, mmmm dS, yyyy, h:MM:ss TT"));
         })
     });
 })
