@@ -205,7 +205,7 @@ App = {
               let dt = Date.setUTCMilliseconds(subscriberDt);
               var results = Math.round(subscriberDt - dt.getTimezoneOffset()*60*1000);
               console.log("[::Verify::]", utcTime, subscriberDt, (utcTime <= subscriberDt), App.FormatDateTime(results), (results <= subscriberDt));
-              console.log("[::Verify::]", utcTime, dt.getTimezoneOffset());
+              console.log("[::Verify::]", utcTime, dt);
               console.log("[::Verify::]", dt, App.FormatDateTime(dt));
               /*let dt = new Date();
               let offset = Math.round(subscriberDt - dt.getTimezoneOffset()*60*1000)
