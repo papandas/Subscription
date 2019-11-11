@@ -203,12 +203,12 @@ App = {
             .then((subscribe) => {
               let subscriberDt = subscribe[2].toNumber();
               let offset = subscribe[3];
-              let utcTime = App.ReturnUTCTime();
-              console.log(i, subscribe[1], "TimeImMilliSeconds", subscriberDt , "Time(EVM)", App.FormatDateTime(subscriberDt), "-NowInGMT-", App.FormatDateTime(utcTime) );
+              //let utcTime = App.ReturnUTCTime();
+              //console.log(i, subscribe[1], "TimeImMilliSeconds", subscriberDt , "Time(EVM)", App.FormatDateTime(subscriberDt), "-NowInGMT-", App.FormatDateTime(utcTime) );
               let dt = new Date();
               let evmDt = new Date(subscriberDt+(dt.getTimezoneOffset()*60*1000)-(parseInt(offset)*60*1000) );
-              console.log("[::Verify::] ", evmDt.getTime(), App.FormatDateTime(evmDt.getTime()), dt.getTimezoneOffset()), (utcTime <= evmDt.getTime());
-              console.log("[::Verify::] Offset", offset)
+              //console.log("[::Verify::] ", evmDt.getTime(), App.FormatDateTime(evmDt.getTime()), dt.getTimezoneOffset()), (utcTime <= evmDt.getTime());
+              //console.log("[::Verify::] Offset", offset)
               console.log("[::Verify::] ", App.ReturnUTCTime(), evmDt.getTime(), (App.ReturnUTCTime() <= evmDt.getTime()) );
 
               //var results = Math.round(subscriberDt - dt.getTimezoneOffset()*60*1000);
@@ -226,7 +226,8 @@ App = {
                 App.subscriptionArray.push({
                   'index': subscribe[0].toNumber(),
                   'creator': subscribe[1],
-                  'endDT': subscriberDt
+                  'endDT': subscriberDt,
+                  'offset': offset
                 })
 
                 // User exist in the list of subscribers
@@ -376,7 +377,13 @@ App = {
         var now = parseInt(App.ReturnUTCTime());
 
         // Find the distance between now and the count down date
-        var distance = parseInt(arr[idx].endDT) - now;
+        let endDT = arr[idx].endDT;
+        let offset = arr[idx].offset;
+        
+        let dt = new Date();
+        let evmDt = new Date(endDT+(dt.getTimezoneOffset()*60*1000)-(parseInt(offset)*60*1000) );
+
+        var distance = parseInt(evmDt) - now;
 
         // Time calculations for days, hours, minutes and seconds
         var days = Math.floor(distance / (1000 * 60 * 60 * 24));
