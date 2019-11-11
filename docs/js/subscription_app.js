@@ -384,7 +384,7 @@ App = {
         let evmDt = new Date(endDT+(dt.getTimezoneOffset()*60*1000)-(parseInt(offset)*60*1000) );
 
         var distance = evmDt.getTime() - now;
-        console.log(evmDt.getTime(), now, distance)
+        //console.log(evmDt.getTime(), now, distance)
 
         // Time calculations for days, hours, minutes and seconds
         var days = Math.floor(distance / (1000 * 60 * 60 * 24));
@@ -406,7 +406,7 @@ App = {
 
         // If the count down is finished, write some text
         if (distance < 0) {
-          //console.log("Remove Time ", "Item"+idx, App.IntervalInstance[`Item${idx}`])
+          console.log("Remove Time ", "Item"+idx, App.IntervalInstance[`Item${idx}`])
           clearInterval(App.IntervalInstance[`Item${idx}`]);
 
           App.toast.fire({
