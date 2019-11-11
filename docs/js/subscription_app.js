@@ -209,7 +209,7 @@ App = {
               let evmDt = new Date(subscriberDt+(dt.getTimezoneOffset()*60*1000)-(parseInt(offset)*60*1000) );
               //console.log("[::Verify::] ", evmDt.getTime(), App.FormatDateTime(evmDt.getTime()), dt.getTimezoneOffset()), (utcTime <= evmDt.getTime());
               //console.log("[::Verify::] Offset", offset)
-              console.log("[::Verify::] ", App.ReturnUTCTime(), evmDt.getTime(), (App.ReturnUTCTime() <= evmDt.getTime()) );
+              //console.log("[::Verify::] ", App.ReturnUTCTime(), evmDt.getTime(), (App.ReturnUTCTime() <= evmDt.getTime()) );
 
               //var results = Math.round(subscriberDt - dt.getTimezoneOffset()*60*1000);
               //console.log("[::Verify::]", utcTime, subscriberDt, (utcTime <= subscriberDt));
