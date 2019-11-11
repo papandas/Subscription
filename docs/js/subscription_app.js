@@ -384,6 +384,7 @@ App = {
         let evmDt = new Date(endDT+(dt.getTimezoneOffset()*60*1000)-(parseInt(offset)*60*1000) );
 
         var distance = evmDt.getTime() - now;
+        console.log(evmDt.getTime(), now, distance)
 
         // Time calculations for days, hours, minutes and seconds
         var days = Math.floor(distance / (1000 * 60 * 60 * 24));
