@@ -155,7 +155,9 @@ App = {
       subscriptionInstance = instance;
       let closingTime = App.ReturnUTCTime() + (1000 * 60 * App.subscriptionTimeInMin);
       console.log("-NowInGMT-", App.FormatDateTime(App.ReturnUTCTime()), "-TimeForEVM-", App.FormatDateTime(closingTime), "--RAW--", closingTime);
-      return subscriptionInstance.putSubscriptions(closingTime, { from: App.account, value: web3.toWei(value, 'ether') });
+      let dt = new Date();
+      let offset = dt.getTimezoneOffset();
+      return subscriptionInstance.putSubscriptions(closingTime, offset.toString(), { from: App.account, value: web3.toWei(value, 'ether') });
     }).then((receipt) => {
       console.log(receipt);
       if (receipt.tx) {
@@ -200,11 +202,13 @@ App = {
           subscriptionInstance.subscriptions(i)
             .then((subscribe) => {
               let subscriberDt = subscribe[2].toNumber();
+              let offset = subscribe[3];
               let utcTime = App.ReturnUTCTime();
               console.log(i, subscribe[1], "TimeImMilliSeconds", subscriberDt , "Time(EVM)", App.FormatDateTime(subscriberDt), "-NowInGMT-", App.FormatDateTime(utcTime) );
               let dt = new Date();
-              let evmDt = new Date(subscriberDt+(dt.getTimezoneOffset()*60*1000)-(-330*60*1000) );
-              console.log("[::Verify::]", evmDt, App.FormatDateTime(evmDt.toUTCString()), dt.getTimezoneOffset());
+              let evmDt = new Date(subscriberDt+(dt.getTimezoneOffset()*60*1000)-(parseInt(offset)*60*1000) );
+              console.log("[::Verify::]", evmDt, App.FormatDateTime(evmDt.toUTCString()), dt.getTimezoneOffset()), (utcTime <= evmDt);
+              console.log("[::Verify::] Offset", offset)
 
               //var results = Math.round(subscriberDt - dt.getTimezoneOffset()*60*1000);
               //console.log("[::Verify::]", utcTime, subscriberDt, (utcTime <= subscriberDt));
