@@ -15,7 +15,9 @@ App = {
   }),
   IntervalInstance: {},
   init: function () {
-    console.log("App initialized...")
+    var d1 = new Date()
+    var TimeInMilliSeconds = (d1.getTime() + d1.getTimezoneOffset()*60*1000)
+    console.log("App initialized...", "TimeInMilliseconds", TimeInMilliSeconds, "--", App.FormatDateTime(TimeInMilliSeconds))
     return App.initWeb3();
   },
 
@@ -197,7 +199,7 @@ App = {
         function QuerySubscription() {
           subscriptionInstance.subscriptions(i)
             .then((subscribe) => {
-              console.log(i, subscribe[1], "Subscription Time", App.FormatDateTime(subscribe[2].toNumber()));
+              console.log(i, subscribe[1], "TimeImMilliSeconds", subscribe[2].toNumber(), "Subscription Time", App.FormatDateTime(subscribe[2].toNumber()));
 
               if (App.ReturnUTCTime() <= subscribe[2].toNumber()) {
                 //console.log("Subscription On!")
@@ -337,7 +339,7 @@ App = {
     //console.log("[IN-LOCAL] Formate: ", App.FormatDateTime(dt), ", Milliseconds", dt);
     var dtUTC = new Date(dt).toLocaleString('en-US', { timeZone: 'UTC' })
     var results = new Date(dtUTC).getTime();
-    //console.log("[IN-UTC] Formate: ", App.FormatDateTime(results), ", Milliseconds", results);
+    console.log("[IN-UTC] Formate: ", App.FormatDateTime(results), ", Milliseconds", results);
     return results;
   },
 
