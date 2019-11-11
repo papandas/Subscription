@@ -200,7 +200,7 @@ App = {
             .then((subscribe) => {
               let subscriberDt = subscribe[2].toNumber();
               console.log(i, subscribe[1], "TimeImMilliSeconds", subscriberDt, "Subscription Time", App.FormatDateTime(subscriberDt));
-              let offset = Math.round(subscriberDt - d1.getTimezoneOffset()*60*1000)
+              let offset = Math.round(subscriberDt - subscriberDt.getTimezoneOffset()*60*1000)
               console.log("Offset: InMilliseconds", offset, "-ii-", App.FormatDateTime(offset))
 
               if (App.ReturnUTCTime() <= subscribe[2].toNumber()) {
