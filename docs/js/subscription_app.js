@@ -207,8 +207,9 @@ App = {
               console.log(i, subscribe[1], "TimeImMilliSeconds", subscriberDt , "Time(EVM)", App.FormatDateTime(subscriberDt), "-NowInGMT-", App.FormatDateTime(utcTime) );
               let dt = new Date();
               let evmDt = new Date(subscriberDt+(dt.getTimezoneOffset()*60*1000)-(parseInt(offset)*60*1000) );
-              console.log("[::Verify::]", evmDt.getTime(), App.FormatDateTime(evmDt.getTime()), dt.getTimezoneOffset()), (utcTime <= evmDt.getTime());
+              console.log("[::Verify::] ", evmDt.getTime(), App.FormatDateTime(evmDt.getTime()), dt.getTimezoneOffset()), (utcTime <= evmDt.getTime());
               console.log("[::Verify::] Offset", offset)
+              console.log("[::Verify::] ", App.ReturnUTCTime(), evmDt.getTime(), (App.ReturnUTCTime() <= evmDt.getTime()) );
 
               //var results = Math.round(subscriberDt - dt.getTimezoneOffset()*60*1000);
               //console.log("[::Verify::]", utcTime, subscriberDt, (utcTime <= subscriberDt));
@@ -218,7 +219,8 @@ App = {
               let offset = Math.round(subscriberDt - dt.getTimezoneOffset()*60*1000)
               console.log("Offset: InMilliseconds", offset, "-ii-", App.FormatDateTime(offset))*/
 
-              if (App.ReturnUTCTime() <= subscriberDt) {
+              if (App.ReturnUTCTime() <= evmDt.getTime()) {
+              //if (App.ReturnUTCTime() <= subscriberDt) {
                 console.log("Subscription On!", )
 
                 App.subscriptionArray.push({
