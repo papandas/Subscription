@@ -69,7 +69,7 @@ App = {
       }).watch(function (error, event) {
         
         if (error === null) {
-          console.log(App.subscriptionIndexCount, event.args._subscriptionIndex.toNumber())
+          //console.log(App.subscriptionIndexCount, event.args._subscriptionIndex.toNumber())
           if(App.subscriptionIndexCount < event.args._subscriptionIndex.toNumber()){
             console.log("["+ event.event+"]","Previous:", App.subscriptionIndexCount,", Current:", event.args._subscriptionIndex.toNumber());
             if(App.subscriptionLoadingComplete){
@@ -204,7 +204,7 @@ App = {
               console.log(i, subscribe[1], "TimeImMilliSeconds", subscriberDt , "Time(EVM)", App.FormatDateTime(subscriberDt), "-NowInGMT-", App.FormatDateTime(utcTime) );
               let dt = new Date();
               let evmDt = new Date(subscriberDt+(dt.getTimezoneOffset()*60*1000));
-              console.log("[::Verify::]", evmDt, App.FormatDateTime(evmDt.toUTCString()));
+              console.log("[::Verify::]", evmDt, App.FormatDateTime(evmDt.toUTCString()), dt.getTimezoneOffset());
 
               //var results = Math.round(subscriberDt - dt.getTimezoneOffset()*60*1000);
               //console.log("[::Verify::]", utcTime, subscriberDt, (utcTime <= subscriberDt));
