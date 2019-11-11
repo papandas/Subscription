@@ -70,7 +70,7 @@ App = {
         if (error === null) {
           //console.log(App.subscriptionIndexCount, event.args._subscriptionIndex.toNumber())
           if(App.subscriptionIndexCount < event.args._subscriptionIndex.toNumber()){
-            console.log("["+ event.event+"]","Previous:", App.subscriptionIndexCount,", Current:", event.args._subscriptionIndex.toNumber());
+            //console.log("["+ event.event+"]","Previous:", App.subscriptionIndexCount,", Current:", event.args._subscriptionIndex.toNumber());
             if(App.subscriptionLoadingComplete){
               App.subscriptionLoadingComplete = false;
               App.GetAllSubscriptions();
@@ -161,9 +161,17 @@ App = {
         $('#content').show();
 
         //App.GetAllSubscriptions();
+        App.toast.fire({
+          type: 'success',
+          title: 'Subscription added successfully.'
+        })
       }
     }).catch((error) => {
       console.error("--Error--", error)
+      App.toast.fire({
+        type: 'error',
+        title: 'Subscription failed.'
+      })
     })
 
 
@@ -189,7 +197,7 @@ App = {
         function QuerySubscription() {
           subscriptionInstance.subscriptions(i)
             .then((subscribe) => {
-              //console.log(i, subscribe[1], "Subscription Time", App.FormatDateTime(subscribe[2].toNumber()));
+              console.log(i, subscribe[1], "Subscription Time", App.FormatDateTime(subscribe[2].toNumber()));
 
               if (App.ReturnUTCTime() <= subscribe[2].toNumber()) {
                 //console.log("Subscription On!")
@@ -291,6 +299,8 @@ App = {
       bodyStr += `</ul>`
       $('#subscriptionListHolder').html(`${bodyStr}`);
     }else{
+      console.log("LOADING COMPLETE!")
+      App.subscriptionLoadingComplete = true;
       $('#subscriptionListHolder').html(`<div class="alert alert-info">
           <strong>Empty!</strong> No active subscribers available.
         </div>`);
@@ -396,6 +406,11 @@ App = {
           // Remove the item from Array
           if(App.subscriptionArray.length > 0){
             App.subscriptionArray.splice(idx, 1); 
+          }else{
+            $('#subscriptionListHolder').empty();
+            $('#subscriptionListHolder').html(`<div class="alert alert-info">
+              <strong>Empty!</strong> No active subscribers available.
+            </div>`);
           }
 
         }
