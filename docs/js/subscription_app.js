@@ -16,26 +16,7 @@ App = {
   IntervalInstance: {},
   init: function () {
     
-    console.log("App initialized...", "TimeInMilliseconds", App.ReturnUTCTime(), "--", App.FormatDateTime(App.ReturnUTCTime()))
-
-    // Multiply by 1000 because JS works in milliseconds instead of the UNIX seconds
-    var date = new Date();
-
-    var year = date.getUTCFullYear();
-    var month = date.getUTCMonth() + 1; // getMonth() is zero-indexed, so we'll increment to get the correct month number
-    var day = date.getUTCDate();
-    var hours = date.getUTCHours();
-    var minutes = date.getUTCMinutes();
-    var seconds = date.getUTCSeconds();
-
-    month = (month < 10) ? '0' + month : month;
-    day = (day < 10) ? '0' + day : day;
-    hours = (hours < 10) ? '0' + hours : hours;
-    minutes = (minutes < 10) ? '0' + minutes : minutes;
-    seconds = (seconds < 10) ? '0' + seconds: seconds;
-
-    console.log(year + '-' + month + '-' + day + ' ' + hours + ':' + minutes);
-    
+    console.log("App initialized...", "TimeInMilliseconds", App.ReturnUTCTime(), "-UTC-", App.FormatDateTime(App.ReturnUTCTime()), "-Now-", App.FormatDateTime(Date.now()));
     return App.initWeb3();
   },
 
@@ -173,6 +154,7 @@ App = {
     App.contracts.Subscription.deployed().then(function (instance) {
       subscriptionInstance = instance;
       let closingTime = App.ReturnUTCTime() + (1000 * 60 * App.subscriptionTimeInMin);
+      console.log("-NowInGMT-", App.FormatDateTime(App.ReturnUTCTime()), "-TimeForEVM-", App.FormatDateTime(closingTime))
       return subscriptionInstance.putSubscriptions(closingTime, { from: App.account, value: web3.toWei(value, 'ether') });
     }).then((receipt) => {
       console.log(receipt);
@@ -218,10 +200,10 @@ App = {
           subscriptionInstance.subscriptions(i)
             .then((subscribe) => {
               let subscriberDt = subscribe[2].toNumber();
-              console.log(i, subscribe[1], "TimeImMilliSeconds", subscriberDt, "Subscription Time", App.FormatDateTime(subscriberDt));
-              let dt = new Date();
+              console.log(i, subscribe[1], "TimeImMilliSeconds", subscriberDt, "Time(EVM)", App.FormatDateTime(subscriberDt), "-NowInGMT-", App.FormatDateTime(App.ReturnUTCTime()) );
+              /*let dt = new Date();
               let offset = Math.round(subscriberDt - dt.getTimezoneOffset()*60*1000)
-              console.log("Offset: InMilliseconds", offset, "-ii-", App.FormatDateTime(offset))
+              console.log("Offset: InMilliseconds", offset, "-ii-", App.FormatDateTime(offset))*/
 
               if (App.ReturnUTCTime() <= subscribe[2].toNumber()) {
                 console.log("Subscription On!", )
