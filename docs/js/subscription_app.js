@@ -15,9 +15,8 @@ App = {
   }),
   IntervalInstance: {},
   init: function () {
-    var d1 = new Date()
-    var TimeInMilliSeconds = (d1.getTime() + d1.getTimezoneOffset()*60*1000)
-    console.log("App initialized...", "TimeInMilliseconds", TimeInMilliSeconds, "--", App.FormatDateTime(TimeInMilliSeconds))
+    
+    console.log("App initialized...", "TimeInMilliseconds", App.ReturnUTCTime(), "--", App.FormatDateTime(App.ReturnUTCTime()))
     return App.initWeb3();
   },
 
@@ -337,9 +336,11 @@ App = {
   ReturnUTCTime: function () {
     var dt = Date.now();
     //console.log("[IN-LOCAL] Formate: ", App.FormatDateTime(dt), ", Milliseconds", dt);
-    var dtUTC = new Date(dt).toLocaleString('en-US', { timeZone: 'UTC' })
-    var results = new Date(dtUTC).getTime();
-    console.log("[IN-UTC] Formate: ", App.FormatDateTime(results), ", Milliseconds", results);
+    //var dtUTC = new Date(dt).toLocaleString('en-US', { timeZone: 'UTC' })
+    //var results = new Date(dtUTC).getTime();
+    
+    var results = Math.round(dt.getTime() + dt.getTimezoneOffset()*60*1000);
+    //console.log("[IN-UTC] Formate: ", App.FormatDateTime(results), ", Milliseconds", results);
     return results;
   },
 
