@@ -198,10 +198,13 @@ App = {
         function QuerySubscription() {
           subscriptionInstance.subscriptions(i)
             .then((subscribe) => {
-              console.log(i, subscribe[1], "TimeImMilliSeconds", subscribe[2].toNumber(), "Subscription Time", App.FormatDateTime(subscribe[2].toNumber()));
+              let subscriberDt = subscribe[2].toNumber();
+              console.log(i, subscribe[1], "TimeImMilliSeconds", subscriberDt, "Subscription Time", App.FormatDateTime(subscriberDt));
+              let offset = Math.round(subscriberDt - d1.getTimezoneOffset()*60*1000)
+              console.log("Offset: InMilliseconds", offset, "-ii-", App.FormatDateTime(offset))
 
               if (App.ReturnUTCTime() <= subscribe[2].toNumber()) {
-                //console.log("Subscription On!")
+                console.log("Subscription On!", )
 
                 App.subscriptionArray.push({
                   'index': subscribe[0].toNumber(),
@@ -330,7 +333,7 @@ App = {
     hours = hours ? hours : 12; // the hour '0' should be '12'
     minutes = minutes < 10 ? '0' + minutes : minutes;
     var strTime = hours + ':' + minutes + ' ' + ampm;
-    return date.getUTCMonth() + 1 + "//" + date.getUTCDate() + "//" + date.getUTCFullYear() + "  " + strTime;
+    return date.getUTCMonth() + 1 + "/" + date.getUTCDate() + "/" + date.getUTCFullYear() + "  " + strTime;
   },
 
   ReturnUTCTime: function () {
@@ -341,7 +344,7 @@ App = {
     
     var dt = new Date();
     var results = Math.round(dt.getTime() + dt.getTimezoneOffset()*60*1000);
-    console.log("[IN-UTC]-Formate: ", App.FormatDateTime(results), ", Milliseconds", results);
+    //console.log("[IN-UTC]-Formate: ", App.FormatDateTime(results), ", Milliseconds", results);
     return results;
   },
 
