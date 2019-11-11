@@ -104,6 +104,10 @@ App = {
       if (err === null) {
         if (account === null) {
           App.LoadLandingPage();
+          App.toast.fire({
+            type: 'error',
+            title: 'User wallet missing.'
+          })
         } else {
           App.account = account;
           console.log("Account Address:", account);
@@ -118,6 +122,8 @@ App = {
                 <a class="dropdown-item" href="#">Balance: ${balance.slice(0, 7)} ETH</a>
                 <a class="dropdown-item" href="#" id="accountType"></a>
                 <a class="dropdown-item" href="https://ropsten.etherscan.io/address/${account}" target="_blank">View On Etherscan</a>`)
+
+              App.LoadLandingPage();
             }
           });
         }
@@ -125,7 +131,7 @@ App = {
       }
     });
 
-    App.LoadLandingPage();
+    
 
     content.show();
     loader.hide();
