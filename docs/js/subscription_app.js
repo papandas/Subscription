@@ -202,10 +202,11 @@ App = {
               let subscriberDt = subscribe[2].toNumber();
               let utcTime = App.ReturnUTCTime();
               console.log(i, subscribe[1], "TimeImMilliSeconds", subscriberDt , "Time(EVM)", App.FormatDateTime(subscriberDt), "-NowInGMT-", App.FormatDateTime(utcTime) );
-              let dt = new Date(subscriberDt);
+              let dt = new Date(subscriberDt).setUTCMilliseconds(0);
               var results = Math.round(subscriberDt - dt.getTimezoneOffset()*60*1000);
               console.log("[::Verify::]", utcTime, subscriberDt, (utcTime <= subscriberDt), App.FormatDateTime(results), (results <= subscriberDt));
               console.log("[::Verify::]", utcTime, dt.getTimezoneOffset());
+              console.log("[::Verify::]", dt, App.FormatDateTime(dt));
               /*let dt = new Date();
               let offset = Math.round(subscriberDt - dt.getTimezoneOffset()*60*1000)
               console.log("Offset: InMilliseconds", offset, "-ii-", App.FormatDateTime(offset))*/
