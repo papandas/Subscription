@@ -69,9 +69,9 @@ App = {
       }).watch(function (error, event) {
         
         if (error === null) {
-          //console.log(App.subscriptionIndexCount, event.args._subscriptionIndex.toNumber())
+          console.log(App.subscriptionIndexCount, event.args._subscriptionIndex.toNumber())
           if(App.subscriptionIndexCount < event.args._subscriptionIndex.toNumber()){
-            //console.log("["+ event.event+"]","Previous:", App.subscriptionIndexCount,", Current:", event.args._subscriptionIndex.toNumber());
+            console.log("["+ event.event+"]","Previous:", App.subscriptionIndexCount,", Current:", event.args._subscriptionIndex.toNumber());
             if(App.subscriptionLoadingComplete){
               App.subscriptionLoadingComplete = false;
               App.GetAllSubscriptions();
@@ -154,7 +154,7 @@ App = {
     App.contracts.Subscription.deployed().then(function (instance) {
       subscriptionInstance = instance;
       let closingTime = App.ReturnUTCTime() + (1000 * 60 * App.subscriptionTimeInMin);
-      console.log("-NowInGMT-", App.FormatDateTime(App.ReturnUTCTime()), "-TimeForEVM-", App.FormatDateTime(closingTime))
+      console.log("-NowInGMT-", App.FormatDateTime(App.ReturnUTCTime()), "-TimeForEVM-", App.FormatDateTime(closingTime), "--RAW--", closingTime);
       return subscriptionInstance.putSubscriptions(closingTime, { from: App.account, value: web3.toWei(value, 'ether') });
     }).then((receipt) => {
       console.log(receipt);
@@ -200,18 +200,19 @@ App = {
           subscriptionInstance.subscriptions(i)
             .then((subscribe) => {
               let subscriberDt = subscribe[2].toNumber();
-              console.log(i, subscribe[1], "TimeImMilliSeconds", subscriberDt, "Time(EVM)", App.FormatDateTime(subscriberDt), "-NowInGMT-", App.FormatDateTime(App.ReturnUTCTime()) );
+              console.log(i, subscribe[1], "TimeImMilliSeconds", subscriberDt , "Time(EVM)", App.FormatDateTime(subscriberDt), "-NowInGMT-", App.FormatDateTime(App.ReturnUTCTime()) );
+              console.log("[::Verify::]", App.ReturnUTCTime(), subscriberDt, (App.ReturnUTCTime() <= subscriberDt));
               /*let dt = new Date();
               let offset = Math.round(subscriberDt - dt.getTimezoneOffset()*60*1000)
               console.log("Offset: InMilliseconds", offset, "-ii-", App.FormatDateTime(offset))*/
 
-              if (App.ReturnUTCTime() <= subscribe[2].toNumber()) {
+              if (App.ReturnUTCTime() <= subscriberDt) {
                 console.log("Subscription On!", )
 
                 App.subscriptionArray.push({
                   'index': subscribe[0].toNumber(),
                   'creator': subscribe[1],
-                  'endDT': subscribe[2].toNumber()
+                  'endDT': subscriberDt
                 })
 
                 // User exist in the list of subscribers
