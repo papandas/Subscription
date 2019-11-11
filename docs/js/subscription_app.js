@@ -334,13 +334,14 @@ App = {
   },
 
   ReturnUTCTime: function () {
-    var dt = Date.now();
+    //var dt = Date.now();
     //console.log("[IN-LOCAL] Formate: ", App.FormatDateTime(dt), ", Milliseconds", dt);
     //var dtUTC = new Date(dt).toLocaleString('en-US', { timeZone: 'UTC' })
     //var results = new Date(dtUTC).getTime();
     
+    var dt = new Date();
     var results = Math.round(dt.getTime() + dt.getTimezoneOffset()*60*1000);
-    //console.log("[IN-UTC] Formate: ", App.FormatDateTime(results), ", Milliseconds", results);
+    console.log("[IN-UTC]-Formate: ", App.FormatDateTime(results), ", Milliseconds", results);
     return results;
   },
 
