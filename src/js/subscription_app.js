@@ -51,7 +51,14 @@ App = {
           console.error("--Error With Conract Initialization--", error);
         }
 
-      });
+      }).catch((error) => {
+        $('#loader').hide();
+        Swal.fire(
+          'Error: Network not detected.',
+          error.message + ".<br/>Kindly switch to <a href='https://www.google.com/chrome/' target='_blank'>Google Chrome</a> web browser with <a href='https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn' target='_blank'>MetaMask</a> installed.",
+          'error'
+        )
+      })
       App.listenForEvents();
       return App.render();
     })
@@ -82,6 +89,12 @@ App = {
           console.error("--Error--", error)
         }
       });
+    }).catch((error) => {
+      Swal.fire(
+        'Error: Network not detected.',
+        error.message + ".<br/>Kindly switch to <a href='https://www.google.com/chrome/' target='_blank'>Google Chrome</a> web browser with <a href='https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn' target='_blank'>MetaMask</a> installed.",
+        'error'
+      )
     })
 
   },
@@ -222,7 +235,7 @@ App = {
               let evmDt = new Date(subscriberDt+(dt.getTimezoneOffset()*60*1000)-(parseInt(offset)*60*1000) );
 
               if (App.ReturnUTCTime() <= evmDt.getTime()) {
-                console.log("Subscription On!", )
+                console.log("Subscription On!")
 
                 App.subscriptionArray.push({
                   'index': subscribe[0].toNumber(),
@@ -263,7 +276,11 @@ App = {
       }
 
     }).catch((error) => {
-      console.error("--Error--", error)
+      Swal.fire(
+        'Error: Network not detected.',
+        error.message + ".<br/>Kindly switch to <a href='https://www.google.com/chrome/' target='_blank'>Google Chrome</a> web browser with <a href='https://chrome.google.com/webstore/detail/metamask/nkbihfbeogaeaoehlefnkodbefgpgknn' target='_blank'>MetaMask</a> installed.",
+        'error'
+      )
     })
   },
 
